@@ -21,6 +21,7 @@ import java.util.Map;
 @EnableWebMvc
 public class App {
 
+
     private static final Logger log = LoggerFactory.getLogger(App.class);
     private static final WeatherGetter weatherGetter = new WeatherGetter();
 
