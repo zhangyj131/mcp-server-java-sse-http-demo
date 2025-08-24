@@ -9,6 +9,7 @@ import io.modelcontextprotocol.spec.McpSchema;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -29,6 +30,22 @@ public class App {
                 new com.fasterxml.jackson.databind.ObjectMapper(),
                 "/mcp/message"
         );
+    }
+
+    @Bean
+    public ServletRegistrationBean<HttpServletSseServerTransportProvider> mcpServletRegistration(
+            HttpServletSseServerTransportProvider transportProvider) {
+
+        log.info("Registering MCP Transport Provider as Servlet...");
+
+        ServletRegistrationBean<HttpServletSseServerTransportProvider> registration =
+                new ServletRegistrationBean<>(transportProvider, "/*");
+
+        registration.setLoadOnStartup(1);
+        registration.setName("mcpTransport");
+
+        log.info("MCP Transport Provider registered as Servlet: {}", registration);
+        return registration;
     }
 
     @Bean
