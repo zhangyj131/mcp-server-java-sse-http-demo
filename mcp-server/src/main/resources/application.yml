@@ -1,0 +1,22 @@
+# src/main/resources/application.yml
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+spring:
+  application:
+    name: mcp-weather-server
+
+logging:
+  level:
+    com.github.stantonk: INFO
+    io.modelcontextprotocol: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+# MCP服务器配置
+mcp:
+  server:
+    name: mcp-springboot-server
+    version: 0.8.1
